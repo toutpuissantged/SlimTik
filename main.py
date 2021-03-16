@@ -1,36 +1,47 @@
 from autoloader import *
 
-
 root = Tk()
 root.geometry("500x380")
-root.title('editorplus')
-global btn1,textarea
-textdata=StringVar()
+root.title('Editor+')
 
-textarea=Text(root,border=0,fg="black",bg="white",width=60,height=20)
+textarea=scrolledtext.ScrolledText(root,border=0,fg="black",bg="white",width=60,height=20)
 textarea.grid(row=0,column=0,padx=10,pady=10)
 
+NewStore= Store(1)
 
-btn_Fr=Frame(root)
-btn_Fr.grid()
+props={
+    'root':root,
+    'textarea':textarea,
+    'Store':NewStore,
+}
+FileInt=FileInterface(props)
 
+NavBar=FileMenu(windows=root,props=props)
+menu=NavBar.monted()
+root.config(menu=menu)
 
-def openfile():
-    global btn1,textarea
-    filedir2=filedialog.askopenfile(title="select folder")
-    if filedir2.name=='':
-        return 0
-    print('filedir=')
-    print(filedir2.name)
-    ff=open(filedir2.name,'rb')
-    data=ff.read()
-    ff.close()
-    print(data)
-    textarea.insert(INSERT,data)
+#test zone
+tab_control = Notebook(root)
 
+tab1 = Frame(tab_control)
 
-btn1=Button(btn_Fr,text="save").grid(row=1,column=0)
-btn1=Button(btn_Fr,text="save as").grid(row=1,column=1)
-btn1=Button(btn_Fr,text="open",command=openfile).grid(row=1,column=2)
+tab2 = Frame(tab_control)
+
+tab_control.add(tab1, text='First')
+
+tab_control.add(tab2, text='Second')
+
+lbl1 = Label(tab1, text= 'label1')
+
+lbl1.grid(column=0, row=0)
+
+lbl2 = Label(tab2, text= 'label2')
+
+lbl2.grid(column=0, row=0)
+
+tab_control.grid()
+#endof test zone
+
+#print(props['data'])
 
 root.mainloop()

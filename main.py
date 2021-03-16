@@ -1,4 +1,4 @@
-from autoloader import *
+`from autoloader import *
 
 root = Tk()
 root.geometry("500x380")

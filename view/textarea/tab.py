@@ -1,5 +1,6 @@
 from autoloader import *
 from tkinter import scrolledtext
+import os
 
 class TabContronller(object):
 
@@ -9,15 +10,25 @@ class TabContronller(object):
         self.tabLen=0
         self.curentTab=1
 
-    def New(self):
+    def New(self,title=''):
         self.tabLen+=1
         tabNum=self.tabLen
         self.tab2=Frame(self.tab_control)
-        titre = ' Untitled-'+str(tabNum)
+        temp1=title.split(os.pathsep)
+        if (len(title)<1): titre = ' Untitled-'+str(tabNum)
+        else : titre=temp1[-1]
         props=self.props
         self.tab_control.add(self.tab2, text=titre)
         textarea = scrolledtext.ScrolledText(self.tab2,border=0,fg="black",bg="white",width=60,height=20)
         textarea.grid(column=0, row=0)
         self.tab_control.grid()
-        props['Store'].set_TabState(newdata=textarea,method='append')
-        return textarea
+        #props['Store'].TabState.append(textarea)
+        #print(props['Store'].TabState)
+        info={
+            'titre':' Untitled-'+str(tabNum),
+            'filedir':'',
+            'textarea':textarea,
+            'id':tabNum,
+        }
+        props['Store'].TabState.append(info)
+        return 0

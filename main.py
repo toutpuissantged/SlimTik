@@ -10,6 +10,7 @@ props={
     'root':root,
     'textarea':[],
     'Store':NewStore,
+    'Tabs':''
 }
 FileInt=FileInterface(props)
 
@@ -21,6 +22,7 @@ root.config(menu=menu)
 tab=TabContronller(props=props)
 tab.New()
 tab.New()
+props['Tabs']=tab
 
 #endof test zone
 

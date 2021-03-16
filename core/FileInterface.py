@@ -4,11 +4,14 @@ class FileInterface():
     
     def __init__(self,props):
        self.props=props
+       #self.TabNum=TabNum
+       self.get_TabState= self.props['Store'].get_TabState
+       self.set_TabState=self.props['Store'].set_TabState
 
     def newfile(self):
         self.filefactory(data='')
 
-    def openfile(self):
+    def openfile(self,Tabnum=1):
         '''  openfile in binarie mode and return content '''
         props=self.props
         filedir=filedialog.askopenfile(title="select folder")
@@ -17,7 +20,10 @@ class FileInterface():
         ff=open(filedir.name,'rb')
         data=ff.read()
         ff.close()
-        props['textarea'].insert(INSERT,data)
+        #props['textarea'].insert(INSERT,data)
+        #props['Store'].set_data(filedir.name)
+        print(self.get_TabState)
+        self.get_TabState[Tabnum].insert(INSERT,data)
         props['Store'].set_data(filedir.name)
         return 0
 

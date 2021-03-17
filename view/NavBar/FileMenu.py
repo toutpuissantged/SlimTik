@@ -10,15 +10,19 @@ class FileMenu():
 
         root=self.windows
         FileInt=FileInterface(self.props)
+        Tab=self.props['Tabs']
         NavBarFrame=Frame(root)
         menu = Menu(NavBarFrame)
-        new_item = Menu(menu)
+        FileBox = Menu(menu)
         Tabnum=0
-        new_item.add_command(label='New File',command=lambda:FileInt.newfile())
-        new_item.add_command(label='Open File',command=lambda:FileInt.openfile(Tabnum=Tabnum))
-        new_item.add_command(label='Save',command=lambda:FileInt.savefile(Tabnum=Tabnum))
-        new_item.add_command(label='Save As',command=lambda:FileInt.savefileas(Tabnum=Tabnum))
-        new_item.add_command(label='Exit',command=root.quit)
-        menu.add_cascade(label='File', menu=new_item)
+        FileBox.add_command(label='New File',command=lambda:FileInt.newfile(),accelerator="Ctrl+N")
+        FileBox.add_command(label='Open File',command=lambda:FileInt.openfile(),accelerator="Ctrl+S")
+        FileBox.add_command(label='Save',command=lambda:FileInt.savefile(),accelerator="Ctrl+Shift+S")
+        FileBox.add_command(label='Save As',command=lambda:FileInt.savefileas(),accelerator="Ctrl+Q")
+        FileBox.add_command(label='close file',command=lambda:Tab.Delete(FileInt.getActiveTab()),accelerator="Ctrl+E")
+        FileBox.add_command(label='Exit',command=root.quit)
+        menu.add_cascade(label='File', menu=FileBox)
+
+        FileBox.bind("<Control-N>",lambda:FileInt.newfile())
         
         return menu

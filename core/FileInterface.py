@@ -12,11 +12,20 @@ class FileInterface():
     def newfile(self):
         
         self.props['Tabs'].New()
+        self.getActiveTab()
 
-    def openfile(self,Tabnum=0):
+    def getActiveTab(self):
+
+        selected=self.props['tab_control'].select()
+        index=self.props['tab_control'].index(selected)
+        #nb.index(nb.select())
+        print(index)
+        return index
+
+    def openfile(self):
         '''  openfile in binarie mode and return content '''
         props=self.props   
-        
+        Tabnum=self.getActiveTab()
         filedir=filedialog.askopenfile(title="select folder")
         try : temp1=filedir.name 
         except:  return 0
@@ -34,13 +43,15 @@ class FileInterface():
         
         return 0
 
-    def savefileas(self,Tabnum=0):
+    def savefileas(self):
         '''    save file in new directory   '''
+        Tabnum=self.getActiveTab()
         data=self.TabState[Tabnum]['textarea'].get(1.0,END)
         self.filefactory(data=data)
 
-    def savefile(self,Tabnum=0):
+    def savefile(self):
         '''    save file in new directory   '''
+        Tabnum=self.getActiveTab()
         props=self.props
         curTab=self.TabState[Tabnum]['textarea']
         filedir=props['Store'].get_data()
@@ -48,6 +59,7 @@ class FileInterface():
         print(filedir)
         data=self.TabState[Tabnum]['textarea'].get(1.0,END)
         ff=open(filedir,'w');ff.write(data);ff.close()
+        self.TabState[Tabnum]['filedir']=filedir
         print('done')
         return 0
 

@@ -1,4 +1,4 @@
-`from autoloader import *
+from autoloader import *
 
 root = Tk()
 root.geometry("500x380")
@@ -10,19 +10,23 @@ props={
     'root':root,
     'textarea':[],
     'Store':NewStore,
-    'Tabs':''
+    'Tabs':'',
+    'CurrentActiveTabIndice':0
 }
+
 FileInt=FileInterface(props)
+tab=TabContronller(props=props)
+
+props['Tabs']=tab
 
 NavBar=FileMenu(windows=root,props=props)
 menu=NavBar.monted()
 root.config(menu=menu)
 
 #test zone
-tab=TabContronller(props=props)
+
 tab.New()
 tab.New()
-props['Tabs']=tab
 
 #endof test zone
 

@@ -29,7 +29,7 @@ class FileInterface():
         filedir=filedialog.askopenfile(title="select folder")
         try : temp1=filedir.name 
         except:  return 0
-        ff=open(filedir.name,'rb')
+        ff=open(filedir.name,'r')
         data=ff.read()
         ff.close()
         #props['textarea'].insert(INSERT,data)
@@ -40,26 +40,40 @@ class FileInterface():
         curTab['textarea'].insert(INSERT,data)
         curTab['fildir']=filedir.name
         props['Store'].set_data(filedir.name)
-        
+        self.TabState[Tabnum]['filedir']=temp1
         return 0
 
     def savefileas(self):
         '''    save file in new directory   '''
         Tabnum=self.getActiveTab()
         data=self.TabState[Tabnum]['textarea'].get(1.0,END)
-        self.filefactory(data=data)
+        fildir=self.filefactory(data=data)
+        self.TabState[Tabnum]['filedir']=fildir
+        self.changetabname(titre=fildir)
+
+
+    def changetabname(self,titre):
+        Tabnum=self.getActiveTab()
+        self.TabState[Tabnum]['titre']=titre
+        print(self.TabState[Tabnum]['titre'])
+        self.TabState[Tabnum]['TabFrame'].configure(text = titre)
+        print('success renamed')
+        return 0
 
     def savefile(self):
         '''    save file in new directory   '''
         Tabnum=self.getActiveTab()
         props=self.props
+        if len(self.TabState[Tabnum]['filedir'])<1: 
+            self.savefileas()
+            return 0
+        #self.TabState[Tabnum]['filedir']=filedir
         curTab=self.TabState[Tabnum]['textarea']
         filedir=props['Store'].get_data()
         if (len(filedir)<1): return 0
         print(filedir)
         data=self.TabState[Tabnum]['textarea'].get(1.0,END)
         ff=open(filedir,'w');ff.write(data);ff.close()
-        self.TabState[Tabnum]['filedir']=filedir
         print('done')
         return 0
 
@@ -71,4 +85,4 @@ class FileInterface():
         ff=open(filedir,'w');ff.write(data);ff.close()
         self.props['Store'].set_data(filedir)
         print('done')
-        return 0
+        return filedir

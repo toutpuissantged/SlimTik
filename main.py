@@ -11,25 +11,21 @@ props={
     'textarea':[],
     'Store':NewStore,
     'Tabs':'',
-    'CurrentActiveTabIndice':0
+    'CurrentActiveTabIndice':0,
+    'Views':{}
 }
 
 FileInt=FileInterface(props)
 tab=TabContronller(props=props)
-
 props['Tabs']=tab
 
-NavBar=FileMenu(windows=root,props=props)
+ViewsEntry=Index(props=props)
+ViewsEntry.main()
+'''NavBar=FileMenu(windows=root,props=props)
 menu=NavBar.monted()
-root.config(menu=menu)
+root.config(menu=menu)'''
 
-#test zone
 
 tab.New()
-tab.New()
-
-#endof test zone
-
-#print(props['data'])
 
 root.mainloop()

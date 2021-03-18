@@ -5,11 +5,12 @@ class FileMenu():
     def __init__(self,windows,props):
         self.windows=windows
         self.props=props
+        self.FileInt=FileInterface(self.props)
+        self.props['FileInt']=self.FileInt
 
     def monted(self):
-
+        FileInt=self.FileInt
         root=self.windows
-        FileInt=FileInterface(self.props)
         Tab=self.props['Tabs']
         NavBarFrame=Frame(root)
         menu = Menu(NavBarFrame)

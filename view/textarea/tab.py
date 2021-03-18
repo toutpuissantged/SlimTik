@@ -14,25 +14,23 @@ class TabContronller(object):
     def New(self,title=''):
         self.tabLen+=1
         tabNum=self.tabLen
-        self.tab2=Frame(self.tab_control)
+        TabFrame=Frame(self.tab_control)
         temp1=title.split('/')
         if (len(title)<1): titre = ' Untitled-'+str(tabNum)
         else : titre=temp1[-1]
-        props=self.props
-        self.tab_control.add(self.tab2, text=titre)
-        #self.tab_control.deletecommand(titre)
-        textarea = scrolledtext.ScrolledText(self.tab2,border=0,fg="black",bg="white",width=60,height=20)
+        self.tab_control.add(TabFrame, text=titre)
+        textarea = scrolledtext.ScrolledText(TabFrame,border=0,fg="black",bg="white",width=60,height=20)
         textarea.grid(column=0, row=0)
+        #textarea.bind("<Control-N>",self.props['FileInt'].newfile())
         self.tab_control.grid()
-        #props['Store'].TabState.append(textarea)
-        #print(props['Store'].TabState)
         info={
             'titre':titre,
             'filedir':title,
             'textarea':textarea,
             'id':tabNum,
+            'TabFrame':TabFrame,
         }
-        props['Store'].TabState.append(info)
+        self.props['Store'].TabState.append(info)
         return 0
 
     def Delete(self,Tabnum):

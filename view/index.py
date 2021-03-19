@@ -7,15 +7,20 @@ class Index():
         self.props['Views']['windows']=Frame(self.props['root'])
 
     def main(self):
+
         root=self.props['root']
+        menubar = Menu(root)
         props=self.props
+        self.props['Views']['Menu']=menubar
+        root.config(menu=menubar)
         
-        NavBar=FileMenu(windows=root,props=props)
+        NavBar=FileMenu(props=props)
         NavBar2=EditMenu(props=props)
 
-        menu=NavBar.monted()
-        menu2=NavBar2.monted()
+        File=NavBar.monted()
+        Edit=NavBar2.monted()
 
-        root.config(menu=menu)
-        root.config(menu=menu2)
-        
+        menubar.add_cascade(label='File', menu=File)
+        menubar.add_cascade(label='Edit', menu=Edit)
+
+        return 0

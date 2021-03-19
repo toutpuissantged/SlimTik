@@ -2,11 +2,21 @@ from autoloader import *
 
 class FileMenu():
 
-    def __init__(self,windows,props):
-        self.windows=windows
+    def __init__(self,props):
+           
         self.props=props
+        self.windows=self.props['Views']['windows']
         self.FileInt=FileInterface(self.props)
         self.props['FileInt']=self.FileInt
+        self.shortcut()
+
+    def shortcut(self):
+        self.NewFile="Ctrl+N"
+        self.Openfile="Ctrl+O"
+        self.SaveFile="Ctrl+S"
+        self.SaveFileAs="Ctrl+Shift+S"
+        self.CloseFile="Ctrl+Q"
+        self.Exit=""
 
     def monted(self):
         FileInt=self.FileInt
@@ -16,14 +26,13 @@ class FileMenu():
         menu = Menu(NavBarFrame)
         FileBox = Menu(menu)
         Tabnum=0
-        FileBox.add_command(label='New File',command=lambda:FileInt.newfile(),accelerator="Ctrl+N")
-        FileBox.add_command(label='Open File',command=lambda:FileInt.openfile(),accelerator="Ctrl+S")
-        FileBox.add_command(label='Save',command=lambda:FileInt.savefile(),accelerator="Ctrl+Shift+S")
-        FileBox.add_command(label='Save As',command=lambda:FileInt.savefileas(),accelerator="Ctrl+Q")
-        FileBox.add_command(label='close file',command=lambda:Tab.Delete(FileInt.getActiveTab()),accelerator="Ctrl+E")
-        FileBox.add_command(label='Exit',command=root.quit)
-        menu.add_cascade(label='File', menu=FileBox)
+        FileBox.add_command(label='New File',command=lambda:FileInt.newfile(),accelerator=self.NewFile)
+        FileBox.add_command(label='Open File',command=lambda:FileInt.openfile(),accelerator=self.Openfile)
+        FileBox.add_command(label='Save',command=lambda:FileInt.savefile(),accelerator=self.SaveFile)
+        FileBox.add_command(label='Save As',command=lambda:FileInt.savefileas(),accelerator=self.SaveFileAs)
+        FileBox.add_command(label='close file',command=lambda:Tab.Delete(FileInt.getActiveTab()),accelerator=self.CloseFile)
+        FileBox.add_command(label='Exit',command=root.quit,accelerator=self.Exit)
 
         FileBox.bind("<Control-N>",lambda:FileInt.newfile())
         
-        return menu
+        return FileBox

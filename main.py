@@ -26,6 +26,7 @@ menu=NavBar.monted()
 root.config(menu=menu)'''
 
 
-tab.New()
+FirstTab=tab.New()
+#FirstTab.bind("<Control-N>",props['FileInt'].newfile())
 
 root.mainloop()

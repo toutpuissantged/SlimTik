@@ -21,7 +21,8 @@ class TabContronller(object):
         self.tab_control.add(TabFrame, text=titre)
         textarea = scrolledtext.ScrolledText(TabFrame,border=0,fg="black",bg="white",width=60,height=20)
         textarea.grid(column=0, row=0)
-        #textarea.bind("<Control-N>",self.props['FileInt'].newfile())
+        
+        
         self.tab_control.grid()
         info={
             'titre':titre,
@@ -31,7 +32,8 @@ class TabContronller(object):
             'TabFrame':TabFrame,
         }
         self.props['Store'].TabState.append(info)
-        return 0
+        TabFrame.bind("<Control>",print('ca marche bien'))
+        return textarea
 
     def Delete(self,Tabnum):
         #self.props['Store'].TabState[Tabnum]['textarea'].hide()

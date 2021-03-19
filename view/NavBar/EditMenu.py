@@ -16,6 +16,19 @@ class EditMenu(FileMenu):
         self.Copy="Ctrl+C"
         self.Paste="Ctrl+V"
 
+    def copy(self, event=None):
+        self.clipboard_clear()
+        text = self.get("sel.first", "sel.last")
+        self.clipboard_append(text)
+    
+    def cut(self, event):
+        self.copy()
+        self.delete("sel.first", "sel.last")
+
+    def paste(self, event):
+        text = self.selection_get(selection='CLIPBOARD')
+        self.insert('insert', text)
+
     def monted(self):
         root=self.windows
         Tab=self.props['Tabs']

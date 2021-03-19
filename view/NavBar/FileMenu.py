@@ -18,8 +18,11 @@ class FileMenu():
         self.CloseFile="Ctrl+Q"
         self.Exit=""
 
+
     def monted(self):
+
         FileInt=self.FileInt
+        MainRoot=self.props['root']
         root=self.windows
         Tab=self.props['Tabs']
         NavBarFrame=Frame(root)
@@ -33,6 +36,10 @@ class FileMenu():
         FileBox.add_command(label='close file',command=lambda:Tab.Delete(FileInt.getActiveTab()),accelerator=self.CloseFile)
         FileBox.add_command(label='Exit',command=root.quit,accelerator=self.Exit)
 
-        FileBox.bind("<Control-N>",lambda:FileInt.newfile())
+        MainRoot.bind("<Control-n>",lambda x :FileInt.newfile())
+        MainRoot.bind("<Control-o>",lambda x :FileInt.openfile())
+        MainRoot.bind("<Control-s>",lambda x :FileInt.savefile())
+        MainRoot.bind("<Control-S>",lambda x :FileInt.savefileas())
+        MainRoot.bind("<Control-q>",lambda x :Tab.Delete(FileInt.getActiveTab()))
         
         return FileBox

@@ -32,11 +32,14 @@ class TabContronller(object):
             'TabFrame':TabFrame,
         }
         self.props['Store'].TabState.append(info)
-        TabFrame.bind("<Control>",print('ca marche bien'))
+        textarea.bind("<Control-N>",lambda:self.test())
         return textarea
 
+    def test(self):
+        print('racourci marche ')
+
     def Delete(self,Tabnum):
-        #self.props['Store'].TabState[Tabnum]['textarea'].hide()
+
         self.tab_control.forget(Tabnum)
         self.props['Store'].TabState.pop(Tabnum-1)
         print('close successful')

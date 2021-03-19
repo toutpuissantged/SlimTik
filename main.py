@@ -4,6 +4,8 @@ root = Tk()
 root.geometry("500x380")
 root.title('Editor+')
 
+root.iconphoto(False, PhotoImage(file = 'assets/icon.png'))
+
 NewStore= Store(1)
 
 props={
@@ -21,12 +23,7 @@ props['Tabs']=tab
 
 ViewsEntry=Index(props=props)
 ViewsEntry.main()
-'''NavBar=FileMenu(windows=root,props=props)
-menu=NavBar.monted()
-root.config(menu=menu)'''
-
 
 FirstTab=tab.New()
-#FirstTab.bind("<Control-N>",props['FileInt'].newfile())
 
 root.mainloop()

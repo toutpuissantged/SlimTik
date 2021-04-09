@@ -22,24 +22,29 @@ class FileInterface():
         print(index)
         return index
 
-    def openfile(self):
+    def openfile(self,dir=''):
         '''  openfile in binarie mode and return content '''
         props=self.props   
         Tabnum=self.getActiveTab()
-        filedir=filedialog.askopenfile(title="select folder")
-        try : temp1=filedir.name 
-        except:  return 0
-        ff=open(filedir.name,'r')
+        if (len(dir)<1):
+            filedir=filedialog.askopenfile(title="select folder")
+            try : temp1=filedir.name 
+            except:  return 0
+            TabName=temp1
+        else :
+            temp1=dir
+            TabName=dir.split('\\')[-1]
+        ff=open(temp1,'r')
         data=ff.read()
         ff.close()
         #props['textarea'].insert(INSERT,data)
-        #props['Store'].set_data(filedir.name)
-        self.props['Tabs'].New(title=temp1)
+        #props['Store'].set_data(temp1)
+        self.props['Tabs'].New(title=TabName)
         print(self.TabState)
         curTab=self.TabState[len(self.TabState)-1]
         curTab['textarea'].insert(INSERT,data)
-        curTab['fildir']=filedir.name
-        props['Store'].set_data(filedir.name)
+        curTab['fildir']=temp1
+        props['Store'].set_data(temp1)
         self.TabState[Tabnum]['filedir']=temp1
         return 0
 

@@ -1,0 +1,1 @@
+cxfreeze --init-script  F:\code\Projets\python\editorplus\main.py --default-path F:\code\Projets\python\editorplus\ --include-path F:\code\Projets\python\editorplus\ --icon F:\code\Projets\python\editorplus\assets\icon.png   --base-name  F:\code\Projets\python\editorplus\main.py --target-name editorplus --includes *

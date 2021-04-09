@@ -4,7 +4,7 @@ root = Tk()
 root.geometry("500x380")
 root.title('Editor+')
 
-root.iconphoto(False, PhotoImage(file = 'assets/icon.png'))
+#root.iconphoto(False, PhotoImage(file = 'icon.png'))
 
 NewStore= Store(1)
 
@@ -24,6 +24,6 @@ props['Tabs']=tab
 ViewsEntry=Index(props=props)
 ViewsEntry.main()
 
-FirstTab=tab.New()
+ArgsParse.parse(props=props)
 
 root.mainloop()

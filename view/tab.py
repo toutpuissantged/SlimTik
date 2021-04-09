@@ -11,7 +11,7 @@ class TabContronller(object):
         self.curentTab=1
         self.props['tab_control']=self.tab_control
 
-    def New(self,title=''):
+    def New(self,title='',dir=""):
         self.tabLen+=1
         tabNum=self.tabLen
         TabFrame=Frame(self.tab_control)

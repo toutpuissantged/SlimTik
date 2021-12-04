@@ -1,4 +1,4 @@
-from autoloader import *
+from tkinter import filedialog , END , INSERT
 
 class FileInterface():
     

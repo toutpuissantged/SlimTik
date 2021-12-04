@@ -10,3 +10,4 @@ from view.FileMenu import FileMenu
 from view.EditMenu import EditMenu
 from view.tab import TabContronller
 from view.index import Index
+from config.info import Config

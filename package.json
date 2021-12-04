@@ -1,0 +1,29 @@
+{
+  "name": "bestofweb",
+  "version": "1.0.0",
+  "description": "web site finder",
+  "main": "main.py",
+  "scripts": {
+    "start": "python main.py",
+    "install": "pip install -r requirements.txt",
+    "dev": "nodemon --exec python main.py",
+    "build": "python build.py build",
+    "test": " python -m unittest discover 'tests'  '*_test.py'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toutpuissantged/BestOfWeb.git"
+  },
+  "keywords": [
+    "website"
+  ],
+  "author": "toutpuissantged",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toutpuissantged/BestOfWeb/issues"
+  },
+  "homepage": "https://github.com/toutpuissantged/BestOfWeb#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

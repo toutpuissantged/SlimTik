@@ -1,29 +1,41 @@
-from autoloader import *
+from autoloader import Config , Store , ArgsParse , FileInterface , Index ,Tk , TabContronller
+from typing import TypedDict
+class Props(TypedDict):
+    root : Tk
+    textarea : str
+    Store : Store
+    Tabs : str
+    CurrentActiveTabIndice : int
+    Views : dict
+    Info : Config
 
-root = Tk()
-root.geometry("500x380")
-root.title('Editor+')
+class App(Tk):
+    def __init__(self):
+        super().__init__()
+        self.geometry(Config.AppInfo['AppScreen'])
+        self.title(Config.AppInfo['AppName'])
+        self.resizable(False,False)
+        self.configure(background=Config.Design['Color']['Background'])
+        self.NewStore= Store(1)
+        self.props : Props = {
+            'root':self,
+            'textarea':[],
+            'Store':self.NewStore,
+            'Tabs':'',
+            'CurrentActiveTabIndice':0,
+            'Views':{},
+            'Info':Config
+        }
 
-#root.iconphoto(False, PhotoImage(file = 'icon.png'))
+        FileInt=FileInterface(self.props)
+        tab=TabContronller(props=self.props)
+        self.props['Tabs']=tab
 
-NewStore= Store(1)
+        Index(props=self.props).main()
 
-props={
-    'root':root,
-    'textarea':[],
-    'Store':NewStore,
-    'Tabs':'',
-    'CurrentActiveTabIndice':0,
-    'Views':{}
-}
+        ArgsParse.parse(props=self.props)
 
-FileInt=FileInterface(props)
-tab=TabContronller(props=props)
-props['Tabs']=tab
 
-ViewsEntry=Index(props=props)
-ViewsEntry.main()
-
-ArgsParse.parse(props=props)
-
-root.mainloop()
+if __name__ == "__main__":
+    app = App()
+    app.mainloop()
